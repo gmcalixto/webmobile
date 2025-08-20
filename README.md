@@ -1,2 +1,2 @@
-# webmobile.github.io
-Meu site publicado no GitHub Codespaces
+# Disciplina WebMobile - FCI
+Laboratórios da disciplina
