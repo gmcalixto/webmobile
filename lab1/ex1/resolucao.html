@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercício — Estrutura semântica</title>
+</head>
+<body>
+  <header>
+    <div class="logo" role="img" aria-label="Minha Marca">Minha Marca</div>
+    <nav aria-label="Principal">
+      <ul>
+        <li><a href="#">Início</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="conteudo-principal">
+    <article>
+      <header>
+        <h1>Boas práticas de CSS</h1>
+      </header>
+      <p>Escreva CSS modular, reutilizável e bem nomeado.</p>
+    </article>
+
+    <aside aria-labelledby="titulo-categorias">
+      <h2 id="titulo-categorias">Categorias</h2>
+      <p>Front-end, UX, Performance</p>
+    </aside>
+  </main>
+
+  <footer>
+    <small>&copy; 2025 Minha Marca</small>
+  </footer>
+</body>
+</html>

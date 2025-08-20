@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+/* Base mobile-first */
+:root { font-size: 16px; }
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  line-height: 1.5;
+}
+
+.topo {
+  padding: 1rem;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+.brand { margin: 0; font-size: 1.5rem; }
+.tagline { margin: .25rem 0 0; color: #666; font-size: .95rem; }
+
+.grid-conteudo {
+  display: grid;
+  grid-template-columns: 1fr;      /* mini-phone/phone: 1 coluna */
+  gap: .75rem;                     /* espaçamento reduzido no bem pequeno */
+  padding: .75rem;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 1rem;
+  background: #fff;
+}
+
+/* ====== Breakpoints por largura (mobile-first) ====== */
+
+/* 361–599px: phone normal (apenas melhora espaçamento) */
+@media (min-width: 361px) {
+  .grid-conteudo { gap: 1rem; padding: 1rem; }
+  .brand { font-size: 1.75rem; }
+}
+
+/* 600–899px: tablet em pé — 2 colunas, tipografia levemente maior */
+@media (min-width: 600px) {
+  :root { font-size: 17px; }
+  .grid-conteudo { grid-template-columns: 1fr 1fr; }
+}
+
+/* 900–1199px: tablet deitado/small desktop — 3 colunas, centraliza */
+@media (min-width: 900px) {
+  :root { font-size: 18px; }
+  .grid-conteudo {
+    grid-template-columns: 1fr 1fr 1fr;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+}
+
+/* ≥ 1200px: desktop amplo — 4 colunas, tipografia maior */
+@media (min-width: 1200px) {
+  :root { font-size: 19px; }
+  .grid-conteudo {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    max-width: 1280px;
+  }
+}
+
+/* ====== Ajustes por orientação ====== */
+@media (orientation: landscape) {
+  .card {
+    /* Menor altura para aproveitar mais largura em landscape */
+    max-height: 220px;
+    overflow: auto;
+  }
+}
+
+/* ====== Extra: mini-phone (≤ 360px) refinado via max-width) ====== */
+@media (max-width: 360px) {
+  :root { font-size: 15px; }
+  .brand { font-size: 1.4rem; }
+  .tagline { font-size: .9rem; }
+  .grid-conteudo { gap: .5rem; padding: .5rem; }
+}
