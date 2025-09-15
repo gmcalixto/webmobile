@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Atividade Prática — DOM (8 exemplos)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+    body { margin: 24px; background: #faf7f5; color: #222; }
+    h1 { margin-bottom: 8px; }
+    .hint { color: #555; margin-bottom: 24px; }
+    section { background: #fff; border: 1px solid #e6e3e1; border-radius: 12px; padding: 18px; margin: 14px 0 22px; }
+    section h2 { margin: 0 0 8px; font-size: 18px; }
+    section p.desc { margin: 0 0 12px; color: #555; }
+    button { cursor: pointer; border-radius: 8px; border: 1px solid #d9d6d4; padding: 8px 12px; }
+    input, button { font-size: 15px; }
+    .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    ul { margin: 8px 0 0 18px; }
+    .box { padding: 14px; border: 1px solid #bbb; border-radius: 10px; }
+    .mt8 { margin-top: 8px; }
+    .mt12 { margin-top: 12px; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; font-size: 13px; color:#444; }
+  </style>
+</head>
+<body>
+  <h1>Atividade Prática — DOM</h1>
+  <p class="hint">Cada exemplo é independente. Leia a descrição e interaja com os controles.</p>
+
+  <!-- 1) Alterar texto de um parágrafo com clique -->
+  <section id="ex1">
+    <h2>1) Alterar texto de um parágrafo com clique</h2>
+    <p class="desc">Clique no botão para alterar o conteúdo do parágrafo.</p>
+    <p id="ex1-texto" class="box">Texto original</p>
+    <button id="ex1-btn">Alterar texto</button>
+    <button id="ex1-reset" class="mt8">Reset</button>
+    <script>
+      (() => {
+        const p = document.getElementById("ex1-texto");
+        const btn = document.getElementById("ex1-btn");
+        const reset = document.getElementById("ex1-reset");
+        const original = p.innerText;
+
+        btn.addEventListener("click", () => {
+          p.innerText = "Texto alterado após o clique!";
+        });
+        reset.addEventListener("click", () => { p.innerText = original; });
+      })();
+    </script>
+  </section>
+
+  <!-- 2) Trocar a cor de uma <section> com botão -->
+  <section id="ex2">
+    <h2>2) Trocar a cor de uma &lt;section&gt; com botão</h2>
+    <p class="desc">Clique para alternar a cor de fundo da caixa.</p>
+    <div id="ex2-caixa" class="box">Cor atual</div>
+    <div class="row mt12">
+      <button id="ex2-btn">Trocar cor</button>
+      <button id="ex2-reset">Reset</button>
+    </div>
+    <script>
+      (() => {
+        const caixa = document.getElementById("ex2-caixa");
+        const cores = ["#fee", "#efe", "#eef", "#ffe", "#eff", "#fef"];
+        let i = 0;
+        document.getElementById("ex2-btn").addEventListener("click", () => {
+          i = (i + 1) % cores.length;
+          caixa.style.backgroundColor = cores[i];
+        });
+        document.getElementById("ex2-reset").addEventListener("click", () => {
+          caixa.style.backgroundColor = "";
+          i = 0;
+        });
+      })();
+    </script>
+  </section>
+
+  <!-- 3) Mostrar em um <p> o valor digitado em um input -->
+  <section id="ex3">
+    <h2>3) Mostrar em um &lt;p&gt; o valor digitado em um input</h2>
+    <p class="desc">Digite no campo e veja o espelho abaixo em tempo real.</p>
+    <div class="row">
+      <input id="ex3-input" placeholder="Digite algo..." />
+      <button id="ex3-clear">Limpar</button>
+    </div>
+    <p id="ex3-out" class="box mt8">Você digitou: <span class="mono">(vazio)</span></p>
+    <script>
+      (() => {
+        const input = document.getElementById("ex3-input");
+        const out = document.getElementById("ex3-out");
+        const render = () => {
+          const v = input.value;
+          out.innerHTML = `Você digitou: <span class="mono">${v ? v : "(vazio)"}</span>`;
+        };
+        input.addEventListener("input", render);
+        document.getElementById("ex3-clear").addEventListener("click", () => {
+          input.value = "";
+          render();
+          input.focus();
+        });
+        render();
+      })();
+    </script>
+  </section>
+
+  <!-- 4) Lista dinâmica: botão adiciona um novo item -->
+  <section id="ex4">
+    <h2>4) Criar lista dinâmica (botão adiciona um novo item)</h2>
+    <p class="desc">Digite um item e clique em “Adicionar”.</p>
+    <div class="row">
+      <input id="ex4-novo" placeholder="Novo item..." />
+      <button id="ex4-add">Adicionar</button>
+      <button id="ex4-clear">Limpar lista</button>
+    </div>
+    <ul id="ex4-lista"></ul>
+    <script>
+      (() => {
+        const inp = document.getElementById("ex4-novo");
+        const lista = document.getElementById("ex4-lista");
+        function renderItem(txt) {
+          const li = document.createElement("li");
+          li.textContent = txt;
+          lista.appendChild(li);
+        }
+        document.getElementById("ex4-add").addEventListener("click", () => {
+          const v = inp.value.trim();
+          if (!v) return;
+          renderItem(v);
+          inp.value = "";
+          inp.focus();
+        });
+        document.getElementById("ex4-clear").addEventListener("click", () => {
+          lista.innerHTML = "";
+          inp.focus();
+        });
+      })();
+    </script>
+  </section>
+
+  <!-- 5) Contador (0 → + / -) -->
+  <section id="ex5">
+    <h2>5) Criar contador (0 → + / −)</h2>
+    <p class="desc">Use os botões para alterar o valor. Há também um Reset.</p>
+    <p id="ex5-valor" class="box" aria-live="polite">0</p>
+    <div class="row">
+      <button id="ex5-men">−</button>
+      <button id="ex5-mais">+</button>
+      <button id="ex5-reset">Reset</button>
+    </div>
+    <script>
+      (() => {
+        let n = 0;
+        const label = document.getElementById("ex5-valor");
+        const update = () => label.textContent = n;
+        document.getElementById("ex5-mais").addEventListener("click", () => { n++; update(); });
+        document.getElementById("ex5-men").addEventListener("click", () => { n--; update(); });
+        document.getElementById("ex5-reset").addEventListener("click", () => { n = 0; update(); });
+        update();
+      })();
+    </script>
+  </section>
+
+  <!-- 6) Mostrar/ocultar elemento com botão -->
+  <section id="ex6">
+    <h2>6) Mostrar/ocultar elemento com botão</h2>
+    <p class="desc">Clique para alternar a visibilidade do painel.</p>
+    <button id="ex6-toggle">Mostrar/Ocultar</button>
+    <div id="ex6-painel" class="box mt8">Conteúdo secreto 😄</div>
+    <script>
+      (() => {
+        const painel = document.getElementById("ex6-painel");
+        const toggle = document.getElementById("ex6-toggle");
+        toggle.addEventListener("click", () => {
+          const visivel = painel.style.display !== "none";
+          painel.style.display = visivel ? "none" : "block";
+          toggle.textContent = visivel ? "Mostrar" : "Ocultar";
+        });
+      })();
+    </script>
+  </section>
+
+  <!-- 7) Dois inputs numéricos e mostrar a soma -->
+  <section id="ex7">
+    <h2>7) Criar dois inputs numéricos e mostrar a soma</h2>
+    <p class="desc">Informe valores (aceita decimais). Clique em “Somar”.</p>
+    <div class="row">
+      <input id="ex7-a" type="number" step="any" placeholder="A" />
+      <input id="ex7-b" type="number" step="any" placeholder="B" />
+      <button id="ex7-somar">Somar</button>
+      <button id="ex7-limpar">Limpar</button>
+    </div>
+    <p id="ex7-res" class="box mt8">Resultado: <span class="mono">0</span></p>
+    <script>
+      (() => {
+        const a = document.getElementById("ex7-a");
+        const b = document.getElementById("ex7-b");
+        const res = document.getElementById("ex7-res");
+        function render(v) {
+          res.innerHTML = `Resultado: <span class="mono">${v}</span>`;
+        }
+        document.getElementById("ex7-somar").addEventListener("click", () => {
+          const va = parseFloat(a.value) || 0;
+          const vb = parseFloat(b.value) || 0;
+          render(va + vb);
+        });
+        document.getElementById("ex7-limpar").addEventListener("click", () => {
+          a.value = ""; b.value = ""; render(0); a.focus();
+        });
+        render(0);
+      })();
+    </script>
+  </section>
+
+  <!-- 8) Ordenar lista de nomes com .sort() -->
+  <section id="ex8">
+    <h2>8) Ordenar uma lista de nomes com <span class="mono">.sort()</span></h2>
+    <p class="desc">Adicione nomes e clique em “Ordenar”. Usa <span class="mono">localeCompare</span> (pt-BR).</p>
+    <div class="row">
+      <input id="ex8-inp" placeholder="Digite um nome..." />
+      <button id="ex8-add">Adicionar</button>
+      <button id="ex8-ord">Ordenar</button>
+      <button id="ex8-clear">Limpar</button>
+    </div>
+    <ul id="ex8-lista"></ul>
+    <script>
+      (() => {
+        const nomes = [];
+        const inp = document.getElementById("ex8-inp");
+        const lista = document.getElementById("ex8-lista");
+
+        function render() {
+          lista.innerHTML = "";
+          nomes.forEach(n => {
+            const li = document.createElement("li");
+            li.textContent = n;
+            lista.appendChild(li);
+          });
+        }
+
+        document.getElementById("ex8-add").addEventListener("click", () => {
+          const v = inp.value.trim();
+          if (!v) return;
+          nomes.push(v);
+          inp.value = "";
+          inp.focus();
+          render();
+        });
+
+        document.getElementById("ex8-ord").addEventListener("click", () => {
+          nomes.sort((a, b) => a.localeCompare(b, "pt-BR", { sensitivity: "base" }));
+          render();
+        });
+
+        document.getElementById("ex8-clear").addEventListener("click", () => {
+          nomes.length = 0;
+          render();
+          inp.focus();
+        });
+
+        render();
+      })();
+    </script>
+  </section>
+
+  <footer class="mt12" style="color:#777">
+    <p class="mono">Atividade DOM • exemplos independentes • pronto para uso em sala</p>
+  </footer>
+</body>
+</html>
