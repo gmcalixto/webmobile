@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Exercício 5 – Média</title>
+</head>
+<body>
+  <input id="n1" type="number" placeholder="Número 1">
+  <input id="n2" type="number" placeholder="Número 2">
+
+  <p id="resultado">—</p>
+
+  <button onclick="media()">Calcular média</button>
+
+  <script>
+    function media() {
+      var a = parseFloat(document.getElementById('n1').value);
+      var b = parseFloat(document.getElementById('n2').value);
+      var out = document.getElementById('resultado');
+
+      if (isNaN(a) || isNaN(b)) {
+        out.textContent = 'Digite dois números válidos.';
+        return;
+      }
+
+      out.textContent = 'Média: ' + ((a + b) / 2);
+    }
+  </script>
+</body>
+</html>

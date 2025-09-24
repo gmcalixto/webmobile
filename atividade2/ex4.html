@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Exercício 4 – Ordenar frutas</title>
+</head>
+<body>
+  <ul id="lista">
+    <li>banana</li>
+    <li>uva</li>
+    <li>maçã</li>
+  </ul>
+
+  <button onclick="ordenar()">Ordenar alfabeticamente</button>
+
+  <script>
+    function ordenar() {
+      var ul = document.getElementById('lista');
+      var itens = [].map.call(ul.querySelectorAll('li'), li => li.textContent);
+
+      itens.sort((a, b) => a.localeCompare(b, 'pt-BR'));
+
+      ul.innerHTML = itens.map(f => '<li>' + f + '</li>').join('');
+    }
+  </script>
+</body>
+</html>

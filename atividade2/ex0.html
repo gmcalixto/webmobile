@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Exercício 0 – Operações em Arrays</title>
+</head>
+<body>
+  <h1>Exercício 0 – Operações em Arrays</h1>
+
+  <p id="mapOut">Resultado com map: —</p>
+  <p id="reduceOut">Resultado com reduce: —</p>
+
+  <button onclick="executar()">Executar operações</button>
+
+  <script>
+    const arr = [1, 2, 3, 4, 5];
+
+    function executar() {
+      document.getElementById('mapOut').textContent =
+        'Resultado com map (dobrado): ' + JSON.stringify(arr.map(n => n * 2));
+
+      document.getElementById('reduceOut').textContent =
+        'Resultado com reduce (soma): ' + arr.reduce((a, b) => a + b, 0);
+    }
+  </script>
+</body>
+</html>

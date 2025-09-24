@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Exercício 7 – Toggle seção</title>
+</head>
+<body>
+  <section id="conteudo" style="padding: 8px; border: 1px solid #ccc;">
+    <h2>Minha Seção</h2>
+    <p>Conteúdo visível/oculto ao clicar no botão.</p>
+  </section>
+
+  <button onclick="toggleSec()">Esconder/Mostrar</button>
+
+  <script>
+    function toggleSec() {
+      var s = document.getElementById('conteudo');
+      s.style.display = (s.style.display === 'none') ? 'block' : 'none';
+    }
+  </script>
+</body>
+</html>

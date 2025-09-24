@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Exercício 2 – Trocar cor do header</title>
+</head>
+<body>
+  <header id="topo" style="padding: 16px; background: #eee;">
+    <h1>Título do Site</h1>
+  </header>
+
+  <button onclick="mudarCor()">Mudar cor do header</button>
+
+  <script>
+    function mudarCor() {
+      var h = document.getElementById('topo');
+      h.style.backgroundColor =
+        (h.style.backgroundColor === 'lightcoral')
+          ? 'lightseagreen'
+          : 'lightcoral';
+    }
+  </script>
+</body>
+</html>

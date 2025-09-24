@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Exercício 6 – Caixa alta</title>
+</head>
+<body>
+  <input id="texto" type="text" placeholder="Digite algo">
+
+  <p id="saida">—</p>
+
+  <button onclick="document.getElementById('saida').textContent = (document.getElementById('texto').value || '').toUpperCase()">
+    Exibir em CAIXA ALTA
+  </button>
+</body>
+</html>
